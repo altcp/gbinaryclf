@@ -283,6 +283,7 @@ class mlmodels:
         x_train, x_test, y_train, y_test = train_test_split(
             x, y, stratify=y, random_state=232
         )
+
         names = []
         result = []
 
@@ -293,9 +294,10 @@ class mlmodels:
             names.append(name)
 
         outcome = pd.DataFrame({"Name": names, "Score": result})
-        outcome_one = outcome.sort_values(by="Score", ascending=True)
-        outcome_two = outcome_one.reset_index(drop=True, inplace=True)
-        best_model = outcome_two["Name"].head(1)
+        # outcome_one = outcome.sort_values(by="Score", ascending=True)
+        # print(outcome_one)
+        # outcome_two = outcome_one.reset_index(drop=True, inplace=True)
+        best_model = outcome["Name"].head(1)
 
         for name, model in models:
             if name == best_model:
@@ -304,7 +306,7 @@ class mlmodels:
             else:
                 continue
 
-        return clf, outcome_two
+        return clf, outcome
 
 
 # %%

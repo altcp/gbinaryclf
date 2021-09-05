@@ -286,21 +286,27 @@ class mlmodels:
 
         names = []
         result = []
+        best_score = 0
 
         for name, model in models:
             model.fit(x_train, y_train)
             y_pred = model.predict(x_test)
-            result.append(f1_score(y_test, y_pred))
+            score = f1_score(y_test, y_pred)
+            result.append(score)
             names.append(name)
 
+            if score > best_score:
+                best_score = score
+                best_clf = name
+            else:
+                continue
+
         outcome = pd.DataFrame({"Name": names, "Score": result})
-        # outcome_one = outcome.sort_values(by="Score", ascending=True)
-        # print(outcome_one)
-        # outcome_two = outcome_one.reset_index(drop=True, inplace=True)
-        best_model = outcome["Name"].head(1)
+        outcome = outcome.sort_values(by="Score", ascending=True)
+        outcome.reset_index(drop=True, inplace=True)
 
         for name, model in models:
-            if name == best_model:
+            if name == best_clf:
                 clf = model
                 break
             else:

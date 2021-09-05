@@ -28,8 +28,8 @@ See -> ./tests/test_example/test_hello.py
 
 </div>
 
-* Feature Selection Using Curated Machine Learning
-* Model Selection Using Curated Machine Learning
+* Feature selection using curated machine learning
+* Model selection using curated machine learning
 <p>&nbsp;</p>
 
 

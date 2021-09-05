@@ -101,7 +101,7 @@ class mlmodels:
         pipe_xgb = Pipeline(
             steps=[
                 ("N", MinMaxScaler()),
-                ("M", XGBClassifier(eval_metric="logloss")),
+                ("M", XGBClassifier(eval_metric="logloss", use_label_encoder=False)),
             ]
         )
 
@@ -260,9 +260,9 @@ class mlmodels:
             models = []
             models.append(
                 (
-                    "XGB",
+                    "GBC",
                     GridSearchCV(
-                        pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
+                        pipe_gbc, param_grid_gbc, cv=5, scoring="accuracy", n_jobs=-2
                     ),
                 )
             )

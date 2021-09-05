@@ -101,7 +101,7 @@ class mlmodels:
         pipe_xgb = Pipeline(
             steps=[
                 ("N", MinMaxScaler()),
-                ("M", XGBClassifier()),
+                ("M", XGBClassifier(eval_metric="logloss")),
             ]
         )
 
@@ -295,7 +295,7 @@ class mlmodels:
         outcome = pd.DataFrame({"Name": names, "Score": result})
         outcome_one = outcome.sort_values(by="Score", ascending=True)
         outcome_two = outcome_one.reset_index(drop=True, inplace=True)
-        best_model = outcome_two["Name"].iloc[0]
+        best_model = outcome_two["Name"].head(1)
 
         for name, model in models:
             if name == best_model:

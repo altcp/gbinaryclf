@@ -315,10 +315,10 @@ class select:
 
         if val_score_after > val_score_before:
             selection = True
-            return x1.columns.values().tolist(), selection
+            return list(x1.columns.values), selection
         else:
             selection = False
-            return x.columns.values().tolist(), selection
+            return list(x.columns.values), selection
 
 
 # %%

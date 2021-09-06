@@ -308,17 +308,16 @@ class select:
             if value[1] == True:
                 selected_x.append(value[0])
 
-        x1 = x[selected_x]
+        x1 = x[[selected_x]]
+
         val_score_after = cross_val_score(
             self.clf, x1, y, cv=5, scoring="accuracy"
         ).mean()
 
         if val_score_after > val_score_before:
-            selection = True
-            return list(x1.columns.values), selection
+            return list(x1.columns.values), True
         else:
-            selection = False
-            return list(x.columns.values), selection
+            return list(x.columns.values), False
 
 
 # %%

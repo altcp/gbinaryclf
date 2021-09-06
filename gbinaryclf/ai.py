@@ -308,7 +308,7 @@ class select:
             if value[1] == True:
                 selected_x.append(value[0])
 
-        x1 = x[[selected_x]]
+        x1 = x[selected_x]
         val_score_after = cross_val_score(
             self.clf, x1, y, cv=5, scoring="accuracy"
         ).mean()

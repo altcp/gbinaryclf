@@ -5,7 +5,7 @@ import gc
 
 import pandas as pd
 import scipy.stats as sps
-from sklearn.ensemble import GradientBoostingClassifier, StackingClassifier
+from sklearn.ensemble import StackingClassifier
 from sklearn.feature_selection import RFECV
 from sklearn.gaussian_process import GaussianProcessClassifier
 from sklearn.gaussian_process.kernels import (
@@ -30,7 +30,7 @@ from sklearn.preprocessing import (
     RobustScaler,
     StandardScaler,
 )
-from sklearn.svm import SVC, LinearSVC
+from sklearn.svm import LinearSVC
 from statsmodels.stats import diagnostic
 from xgboost import XGBClassifier
 
@@ -243,9 +243,9 @@ class mlmodels:
             models.append(
                 ("XGB", XGBClassifier(eval_metric="logloss", use_label_encoder=False))
             )
-            models.append(("GBC", GradientBoostingClassifier()))
             models.append(("LRC", LogisticRegression()))
             models.append(("PPC", Perceptron()))
+            models.append(("SVC", LinearSVC()))
 
         x_train, x_test, y_train, y_test = train_test_split(
             x, y, stratify=y, random_state=232
@@ -295,7 +295,6 @@ class select:
         x = self.df.loc[:, self.df.columns.difference([self.target])]
         features = x.columns
 
-        # Cross Validation (BEFORE)
         val_score_before = cross_val_score(
             self.clf, x, y, cv=5, scoring="accuracy"
         ).mean()
@@ -309,7 +308,7 @@ class select:
             if value[1] == True:
                 selected_x.append(value[0])
 
-        x1 = x[selected_x]
+        x1 = x[[selected_x]]
         val_score_after = cross_val_score(
             self.clf, x1, y, cv=5, scoring="accuracy"
         ).mean()

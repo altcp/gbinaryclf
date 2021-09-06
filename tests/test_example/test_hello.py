@@ -18,7 +18,7 @@ def test_selection():
 
     if selection == True:
         df_test_select = df_test[selected_x]
-        df_test_select["Y"] = df_test["Y"]
+        df_test_select.loc[:, "Y"] = df_test["Y"]
         clf, outcome = mlmodels(df_test_select, "Y", False).classifiers()
     else:
         clf, outcome = mlmodels(df_test, "Y", False).classifiers()

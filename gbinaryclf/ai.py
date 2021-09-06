@@ -267,14 +267,6 @@ class mlmodels:
             )
             models.append(
                 (
-                    "PPC",
-                    GridSearchCV(
-                        pipe_ppc, param_grid_ppc, cv=5, scoring="accuracy", n_jobs=-2
-                    ),
-                )
-            )
-            models.append(
-                (
                     "XGB",
                     GridSearchCV(
                         pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2

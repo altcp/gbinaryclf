@@ -265,16 +265,16 @@ class mlmodels:
             # ),
             # )
             # )
-            models.append(
-                (
-                    "XGB",
-                    GridSearchCV(
-                        pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
-                    ),
-                )
-            )
-            # models.append(("LRC", make_pipeline(MinMaxScaler(), LogisticRegression())))
-            # models.append(("SVC", make_pipeline(MinMaxScaler(), SVC())))
+            # models.append(
+            # (
+            # "XGB",
+            # GridSearchCV(
+            # pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
+            # ),
+            # )
+            # )
+            models.append(("LRC", make_pipeline(MinMaxScaler(), LogisticRegression())))
+            models.append(("SVC", make_pipeline(MinMaxScaler(), SVC())))
 
         x_train, x_test, y_train, y_test = train_test_split(
             x, y, stratify=y, random_state=232

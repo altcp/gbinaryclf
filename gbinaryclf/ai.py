@@ -315,7 +315,7 @@ class select:
 
         if val_score_after > val_score_before:
             selection = True
-            return selected_x, selection
+            return x1.columns, selection
         else:
             selection = False
             return x.columns, selection

@@ -23,7 +23,6 @@ from sklearn.linear_model import (
 )
 from sklearn.metrics import f1_score
 from sklearn.model_selection import GridSearchCV, cross_val_score, train_test_split
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import (
     MinMaxScaler,
@@ -267,7 +266,12 @@ class mlmodels:
                 )
             )
             models.append(
-                ("KNN", make_pipeline(MinMaxScaler(), KNeighborsClassifier()))
+                (
+                    "PPC",
+                    GridSearchCV(
+                        pipe_ppc, param_grid_ppc, cv=5, scoring="accuracy", n_jobs=-2
+                    ),
+                )
             )
             models.append(
                 (

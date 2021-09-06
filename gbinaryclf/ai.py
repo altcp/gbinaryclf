@@ -112,24 +112,6 @@ class mlmodels:
             "clf__reg_lambda": [0.1, 0.3, 0.5, 0.7],
         }
 
-        # GBC
-        pipe_gbc = Pipeline(
-            steps=[
-                ("N", MinMaxScaler()),
-                ("clf", GradientBoostingClassifier()),
-            ]
-        )
-
-        param_grid_gbc = {
-            "clf__loss": ["deviance"],
-            "clf__learning_rate": [0.01, 0.1, 0.2],
-            "clf__max_depth": [3, 5, 8],
-            "clf__max_features": ["log2", "sqrt"],
-            "clf__criterion": ["friedman_mse"],
-            "clf__subsample": [0.5, 0.75, 1.0],
-            "clf__n_estimators": [10],
-        }
-
         # GPC
         dist = distribution(y).aware()
         if dist == "norm":
@@ -257,26 +239,13 @@ class mlmodels:
         else:
 
             models = []
+            models.append(("PAC", PassiveAggressiveClassifier()))
             models.append(
-                (
-                    "GBC",
-                    GridSearchCV(
-                        pipe_gbc, param_grid_gbc, cv=5, scoring="accuracy", n_jobs=-2
-                    ),
-                )
+                ("XGB", XGBClassifier(eval_metric="logloss", use_label_encoder=False))
             )
-
-            # models.append(
-            # (
-            # "XGB",
-            # GridSearchCV(
-            # pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
-            # ),
-            # )
-            # )
-
+            models.append(("GBC", GradientBoostingClassifier()))
             models.append(("LRC", LogisticRegression()))
-            models.append(("SVC", SVC()))
+            models.append(("PPC", Perceptron()))
 
         x_train, x_test, y_train, y_test = train_test_split(
             x, y, stratify=y, random_state=232

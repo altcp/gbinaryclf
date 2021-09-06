@@ -11,12 +11,14 @@ def test_selection():
 
     df_train = pd.read_excel(train).fillna(0)
     df_test = pd.read_excel(test).fillna(0)
+    df_test_select = pd.DataFrame()
 
     clf, outcome = mlmodels(df_train, "Y", True).classifiers()
     selected_x, selection = select(df_test, "Y", clf).feature()
 
     if selection == True:
-        df_test_select = df_test[[selected_x, "Y"]]
+        df_test_select = df_test[selected_x]
+        df_test_select["Y"] = df_test["Y"]
         clf, outcome = mlmodels(df_test_select, "Y", False).classifiers()
     else:
         clf, outcome = mlmodels(df_test, "Y", False).classifiers()

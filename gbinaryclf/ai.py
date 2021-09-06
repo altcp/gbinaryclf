@@ -265,14 +265,14 @@ class mlmodels:
                     ),
                 )
             )
-            models.append(
-                (
-                    "XGB",
-                    GridSearchCV(
-                        pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
-                    ),
-                )
-            )
+            # models.append(
+            #   (
+            #      "XGB",
+            #     GridSearchCV(
+            #        pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
+            #    ),
+            # )
+            # )
             # models.append(("LRC", make_pipeline(MinMaxScaler(), LogisticRegression())))
             # models.append(("SVC", make_pipeline(MinMaxScaler(), SVC())))
 

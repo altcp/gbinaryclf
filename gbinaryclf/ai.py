@@ -274,7 +274,7 @@ class mlmodels:
             # )
             # )
             models.append(("LRC", make_pipeline(MinMaxScaler(), LogisticRegression())))
-            models.append(("SVC", make_pipeline(MinMaxScaler(), SVC())))
+            # models.append(("SVC", make_pipeline(MinMaxScaler(), SVC())))
 
         x_train, x_test, y_train, y_test = train_test_split(
             x, y, stratify=y, random_state=232

@@ -4,7 +4,7 @@
 
 [![Build status](https://github.com/altcp/gbinaryclf/workflows/build/badge.svg?branch=master&event=push)](https://github.com/altcp/gbinaryclf/actions?query=workflow%3Abuild)
 [![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/altcp/gbinaryclf/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
-[![pypi](https://img.shields.io/pypi/v/gdemandfcast.svg)](https://pypi.python.org/pypi/gbinaryclf)
+[![pypi](https://img.shields.io/pypi/v/gbinaryclf.svg)](https://pypi.python.org/pypi/gbinaryclf)
 
 </div>
 

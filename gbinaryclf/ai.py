@@ -126,7 +126,7 @@ class mlmodels:
             "M__learning_rate": [0.01, 0.1, 0.2],
             "M__max_depth": [3, 5, 8],
             "M__max_features": ["log2", "sqrt"],
-            "M__criterion": ["friedman_mse", "mae"],
+            "M__criterion": ["friedman_mse"],
             "M__subsample": [0.5, 0.75, 1.0],
             "M__n_estimators": [10],
         }
@@ -173,9 +173,9 @@ class mlmodels:
         # SKS
         pipe_sks = [
             (
-                "GBC",
+                "XGB",
                 GridSearchCV(
-                    pipe_gbc, param_grid_gbc, cv=5, scoring="accuracy", n_jobs=-2
+                    pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
                 ),
             ),
             ("SVC", make_pipeline(StandardScaler(), LinearSVC())),
@@ -184,9 +184,9 @@ class mlmodels:
         # SKR
         pipe_skr = [
             (
-                "GBC",
+                "XGB",
                 GridSearchCV(
-                    pipe_gbc, param_grid_gbc, cv=5, scoring="accuracy", n_jobs=-2
+                    pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
                 ),
             ),
             ("SVC", make_pipeline(RobustScaler(), LinearSVC())),
@@ -248,9 +248,9 @@ class mlmodels:
             )
             models.append(
                 (
-                    "XGB",
+                    "PPC",
                     GridSearchCV(
-                        pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
+                        pipe_ppc, param_grid_ppc, cv=5, scoring="accuracy", n_jobs=-2
                     ),
                 )
             )
@@ -267,15 +267,15 @@ class mlmodels:
                 )
             )
             models.append(
-                (
-                    "PPC",
-                    GridSearchCV(
-                        pipe_ppc, param_grid_ppc, cv=5, scoring="accuracy", n_jobs=-2
-                    ),
-                )
+                ("KNN", make_pipeline(MinMaxScaler(), KNeighborsClassifier()))
             )
             models.append(
-                ("KNN", make_pipeline(MinMaxScaler(), KNeighborsClassifier()))
+                (
+                    "XGB",
+                    GridSearchCV(
+                        pipe_xgb, param_grid_xgb, cv=5, scoring="accuracy", n_jobs=-2
+                    ),
+                )
             )
             models.append(("LRC", make_pipeline(MinMaxScaler(), LogisticRegression())))
             models.append(("SVC", make_pipeline(MinMaxScaler(), SVC())))

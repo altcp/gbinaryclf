@@ -148,7 +148,6 @@ class mlmodels:
         param_grid_gpc = {
             "M__kernel": kernel_list,
             "M__n_restarts_optimizer": [0, 2, 4, 8],
-            "M__alpha": [0.0001, 0.001, 0.01, 0.1],
         }
 
         # SKS

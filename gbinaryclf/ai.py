@@ -100,34 +100,34 @@ class mlmodels:
         pipe_xgb = Pipeline(
             steps=[
                 ("N", MinMaxScaler()),
-                ("M", XGBClassifier(eval_metric="logloss", use_label_encoder=False)),
+                ("clf", XGBClassifier(eval_metric="logloss", use_label_encoder=False)),
             ]
         )
 
         param_grid_xgb = {
-            "M__gamma": [1, 2, 3],
-            "M__max_depth": [1, 3, 5],
-            "M__eta": [0.4, 0.6, 0.8, 1.0],
-            "M__reg_alpha": [0.1, 0.3, 0.5, 0.7],
-            "M__reg_lambda": [0.1, 0.3, 0.5, 0.7],
+            "clf__gamma": [1, 2, 3],
+            "clf__max_depth": [1, 3, 5],
+            "clf__eta": [0.4, 0.6, 0.8, 1.0],
+            "clf__reg_alpha": [0.1, 0.3, 0.5, 0.7],
+            "clf__reg_lambda": [0.1, 0.3, 0.5, 0.7],
         }
 
         # GBC
         pipe_gbc = Pipeline(
             steps=[
                 ("N", MinMaxScaler()),
-                ("M", GradientBoostingClassifier()),
+                ("clf", GradientBoostingClassifier()),
             ]
         )
 
         param_grid_gbc = {
-            "M__loss": ["deviance"],
-            "M__learning_rate": [0.01, 0.1, 0.2],
-            "M__max_depth": [3, 5, 8],
-            "M__max_features": ["log2", "sqrt"],
-            "M__criterion": ["friedman_mse"],
-            "M__subsample": [0.5, 0.75, 1.0],
-            "M__n_estimators": [10],
+            "clf__loss": ["deviance"],
+            "clf__learning_rate": [0.01, 0.1, 0.2],
+            "clf__max_depth": [3, 5, 8],
+            "clf__max_features": ["log2", "sqrt"],
+            "clf__criterion": ["friedman_mse"],
+            "clf__subsample": [0.5, 0.75, 1.0],
+            "clf__n_estimators": [10],
         }
 
         # GPC
@@ -166,7 +166,7 @@ class mlmodels:
         param_grid_gpc = {
             "M__kernel": kernel_list,
             "M__n_restarts_optimizer": [0, 2, 4, 8],
-            "M__alpha": [1e-10, 1e7, 1e-5, 1e-3],
+            "M__alpha": [1e-10, 1e-7, 1e-5, 1e-3],
         }
 
         # SKS
@@ -257,14 +257,15 @@ class mlmodels:
         else:
 
             models = []
-            # models.append(
-            # (
-            # "GBC",
-            # GridSearchCV(
-            # pipe_gbc, param_grid_gbc, cv=5, scoring="accuracy", n_jobs=-2
-            # ),
-            # )
-            # )
+            models.append(
+                (
+                    "GBC",
+                    GridSearchCV(
+                        pipe_gbc, param_grid_gbc, cv=5, scoring="accuracy", n_jobs=-2
+                    ),
+                )
+            )
+
             # models.append(
             # (
             # "XGB",
@@ -273,6 +274,7 @@ class mlmodels:
             # ),
             # )
             # )
+
             models.append(("LRC", LogisticRegression()))
             models.append(("SVC", SVC()))
 

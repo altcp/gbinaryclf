@@ -360,7 +360,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
 name = "patsy"
-version = "0.5.1"
+version = "0.5.2"
 description = "A Python package for describing statistical models and for building design matrices."
 category = "main"
 optional = false
@@ -369,6 +369,9 @@ python-versions = "*"
 [package.dependencies]
 numpy = ">=1.4"
 six = "*"
+
+[package.extras]
+test = ["pytest", "pytest-cov", "scipy"]
 
 [[package]]
 name = "pbr"
@@ -970,8 +973,8 @@ pathspec = [
     {file = "pathspec-0.9.0.tar.gz", hash = "sha256:e564499435a2673d586f6b2130bb5b95f04a3ba06f81b8f895b651a3c76aabb1"},
 ]
 patsy = [
-    {file = "patsy-0.5.1-py2.py3-none-any.whl", hash = "sha256:5465be1c0e670c3a965355ec09e9a502bf2c4cbe4875e8528b0221190a8a5d40"},
-    {file = "patsy-0.5.1.tar.gz", hash = "sha256:f115cec4201e1465cd58b9866b0b0e7b941caafec129869057405bfe5b5e3991"},
+    {file = "patsy-0.5.2-py2.py3-none-any.whl", hash = "sha256:cc80955ae8c13a7e7c4051eda7b277c8f909f50bc7d73e124bc38e2ee3d95041"},
+    {file = "patsy-0.5.2.tar.gz", hash = "sha256:5053de7804676aba62783dbb0f23a2b3d74e35e5bfa238b88b7cbf148a38b69d"},
 ]
 pbr = [
     {file = "pbr-5.6.0-py2.py3-none-any.whl", hash = "sha256:c68c661ac5cc81058ac94247278eeda6d2e6aecb3e227b0387c30d277e7ef8d4"},
